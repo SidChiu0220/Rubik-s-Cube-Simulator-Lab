@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=RubiksCube
+comment1.params=
+comment1.target=RubiksCube()
+comment2.params=face
+comment2.target=void\ displayFace(int)
+comment3.params=
+comment3.target=void\ displayAll()
+numComments=4
