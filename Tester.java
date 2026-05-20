@@ -2,14 +2,13 @@ public class Tester {
 
     public static void main(String[] args){
 
-        RubiksCube cube = new RubiksCube();
+        RubiksCubeSolution cube = new RubiksCubeSolution();
 
         System.out.println("Original Face:");
-        cube.displayFace(0);
+        cube.displayCube();
 
-        cube.rotateFaceClockwise(0);
-
+        cube.rotateTop(true);
         System.out.println("\nAfter Rotation:");
-        cube.displayFace(0);
+        cube.displayCube();
     }
 }

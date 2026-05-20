@@ -1,44 +1,22 @@
 public class RubiksCube{
-    private char [][][] cube = new char[6][3][3];
-    static private char[] faceColors = {'W', 'Y', 'G', 'B', 'O', 'R'};
+    private char [][][] cube = new char[6][2][2];
+    static private char[] faceColors = {'Y', 'O', 'B', 'R', 'G', 'W'};
     
     public RubiksCube(){
-        //Initiate and assign right colors of all 6 faces
+    //Initiate and assign right colors of all 6 faces
     }
     
     public void displayFace(int face){
-        for (char[] row:cube[face]){
-            for (char col:row)
-                System.out.print(col + " ");
-                
-            System.out.println();
-        }
+    //Display the assigned face and assinged padding
     }
     
     public void displayAll(){
-        //Write the displayAll() code
+    //Display all 6 faces in the correct format using at least two calls of displayFace() method
     }
     
-    public void rotateFaceClockwise(int face){
-
-    char[][] temp = new char[3][3];
-
-    // Copy rotated values into temp
-    for (int row = 0; row < 3; row++){
-        for (int col = 0; col < 3; col++){
-
-            temp[col][2 - row] = cube[face][row][col];
-
-        }
+    public void rotateTop(boolean clockwise) {
+    //Rotate the top face:
+    //The stickers the top later is shifted
+    //the top rows of the 4 faces that share a side with it will shift
     }
-
-    // Copy temp back into cube
-    for (int row = 0; row < 3; row++){
-        for (int col = 0; col < 3; col++){
-
-            cube[face][row][col] = temp[row][col];
-
-        }
-    }
-}
 }

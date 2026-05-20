@@ -2,10 +2,10 @@
 comment0.target=RubiksCubeSolution
 comment1.params=
 comment1.target=RubiksCubeSolution()
-comment2.params=face
-comment2.target=void\ displayFace(int)
+comment2.params=face\ padding
+comment2.target=void\ displayFace(int,\ java.lang.String)
 comment3.params=
-comment3.target=void\ displayAll()
-comment4.params=face
-comment4.target=void\ rotateFaceClockwise(int)
+comment3.target=void\ displayCube()
+comment4.params=clockwise
+comment4.target=void\ rotateTop(boolean)
 numComments=5
