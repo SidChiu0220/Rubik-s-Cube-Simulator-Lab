@@ -5,10 +5,9 @@ public class Tester {
         RubiksCubeSolution cube = new RubiksCubeSolution();
 
         System.out.println("Original Face:");
+        
+        
         cube.displayCube();
-
-        cube.rotateTop(true);
-        System.out.println("\nAfter Rotation:");
-        cube.displayCube();
+        cube.scramble(1);
     }
 }

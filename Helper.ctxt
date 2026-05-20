@@ -1,11 +1,15 @@
 #BlueJ class context
 comment0.target=Helper
-comment1.params=face
-comment1.target=void\ rotateFaceClockwise(char[][])
-comment2.params=face
-comment2.target=void\ rotateFaceCounterClockwise(char[][])
+comment1.params=cube
+comment1.target=void\ tiltCubeForward(char[][][])
+comment2.params=cube
+comment2.target=void\ tiltCubeBackward(char[][][])
 comment3.params=cube
-comment3.target=void\ tiltCubeForward(char[][][])
+comment3.target=void\ spinCubeRight(char[][][])
 comment4.params=cube
-comment4.target=void\ spinCubeRight(char[][][])
-numComments=5
+comment4.target=void\ spinCubeLeft(char[][][])
+comment5.params=face
+comment5.target=void\ rotateFaceClockwise(char[][])
+comment6.params=face
+comment6.target=void\ rotateFaceCounterClockwise(char[][])
+numComments=7

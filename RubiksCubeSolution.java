@@ -1,6 +1,6 @@
 public class RubiksCubeSolution{
-    private char [][][] cube = new char[6][2][2];
-    static private char[] faceColors = {'Y', 'O', 'B', 'R', 'G', 'W'};
+    private char [][][] cube = new char[6][3][3];
+    static private char[] faceColors = {'Y', 'R', 'G', 'O', 'B', 'W'};
     
     public RubiksCubeSolution(){
         //Initiate and assign right colors of all 6 faces
@@ -14,79 +14,120 @@ public class RubiksCubeSolution{
             }
     }
     
-    public void displayFace(int face, String padding){
-    //Display the assigned face and assinged padding
-        for (char[] row:cube[face]){
-            System.out.print(padding); // Add padding
-            for (char col:row)
+    public void displayFace(int face, String padding) {
+        for (char[] row : cube[face]) {
+            System.out.print(padding);
+            for (char col : row) {
                 System.out.print(col + " ");
-                
+            }
             System.out.println();
         }
     }
-    
+
     public void displayCube() {
-    //Display all 6 faces in the correct format using at least two calls of displayFace() method
+        displayFace(0, "        ");
         
-        // 1. Print Top Face (Index 0) with 6 spaces of padding
-        displayFace(0, "     ");
-        
-        // 2. Print Middle Faces (Indices 1, 2, 3, 4) side-by-side
-        // We loop through the 3 rows manually so they stay on the same line
-        for (int r = 0; r < 2; r++) {
-            
-            // Print row 'r' for each middle face sequentially
+        //Print Middle Faces (Indices 1, 2, 3, 4) side-by-side
+        for (int r = 0; r < 3; r++) {
             for (int f = 1; f <= 4; f++) {
-                for (int c = 0; c < 2; c++) {
+                for (int c = 0; c < 3; c++) {
                     System.out.print(cube[f][r][c] + " ");
                 }
                 System.out.print(" ");
             }
-            System.out.println(); // Move to the next line after finishing row r for all 4 faces
+            System.out.println();
         }
         
-        // 3. Print Bottom Face (Index 5) with 6 spaces of padding
-        displayFace(5, "     ");
+        displayFace(5, "        ");
     }
     
     
-    public void rotateTop(boolean clockwise) {
-        // 1. Save the top-left sticker of the Yellow face so it doesn't get lost
+    public void rotateTop() {
+    //Rotate the top face:
+    //The stickers the top later is shifted
+    //the top rows of the 4 faces that share a side with it will shift
+    
+        //Swap corners
         char temp = cube[0][0][0];
+        cube[0][0][0] = cube[0][2][0]; 
+        cube[0][2][0] = cube[0][2][2];
+        cube[0][2][2] = cube[0][0][2];
+        cube[0][0][2] = temp;
         
-        // 2. Shift the remaining 3 stickers of the Yellow face based on direction
-        if (clockwise) {
-            cube[0][0][0] = cube[0][1][0]; 
-            cube[0][1][0] = cube[0][1][1];
-            cube[0][1][1] = cube[0][0][1]; 
-            cube[0][0][1] = temp;
-        } else {
-            cube[0][0][0] = cube[0][0][1]; 
-            cube[0][0][1] = cube[0][1][1];
-            cube[0][1][1] = cube[0][1][0]; 
-            cube[0][1][0] = temp;
+        //Swap edges
+        temp = cube[0][0][1];
+        cube[0][0][1] = cube[0][1][0];
+        cube[0][1][0] = cube[0][2][1];
+        cube[0][2][1] = cube[0][1][2];
+        cube[0][1][2] = temp;
+    
+        //Blue(4) -> Red(3) -> Green(2) -> Orange(1) -> Blue(4)
+        for (int piece = 0;piece < 3;piece++){
+        //3 pieces per face are changed, so 4 pieces are exchanged at a time
+            temp = cube[1][0][piece];
+            cube[1][0][piece] = cube[2][0][piece];
+            cube[2][0][piece] = cube[3][0][piece];
+            cube[3][0][piece] = cube[4][0][piece];
+            cube[4][0][piece] = temp;
         }
-
-        // 3. Define the cycle order of the 4 side faces surrounding the Top layer
-        // Clockwise: Orange(1) <- Blue(2) <- Red(3) <- Green(4) <- Orange(1)
-        // Counter-Clockwise: Orange(1) <- Green(4) <- Red(3) <- Blue(2) <- Orange(1)
-        int[] faces;
-        if (clockwise)
-            faces = new int[]{1, 2, 3, 4, 1};
-        else
-            faces = new int[]{1, 4, 3, 2, 1};
+    }
+    
+    public void rotateFace(int face) {
+        if (face == 0) {
+            rotateTop();
+        } else if (face == 1) {
+            Helper.spinCubeRight(cube);
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+            Helper.spinCubeLeft(cube);
+        } else if (face == 2) { // Front (Green)
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+        } else if (face == 3) { // Right (Orange)
+            Helper.spinCubeLeft(cube);
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+            Helper.spinCubeRight(cube);
+        } else if (face == 4) { // Back (Blue)
+            Helper.spinCubeRight(cube);
+            Helper.spinCubeRight(cube);
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+            Helper.spinCubeRight(cube);
+            Helper.spinCubeRight(cube);
+        } else if (face == 5) { // Down (White)
+            Helper.tiltCubeForward(cube);
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+            Helper.tiltCubeBackward(cube);
+        }
+    }
+    
+    public void scramble(int moves){
+        String[] notation = {"U", "L", "F", "R", "B", "D"};
+        String[] suffixes = {"", "2", "'"};
+        String scrambleString = "";
+        int lastFace = -1;
         
-        // 4. Loop through both columns (index 0 and 1) of the top row
-        for (int c = 0; c < 2; c++) {
-            // Save the starting face's sticker for this column
-            char t = cube[faces[0]][0][c];
+        for (int i = 0;i<moves;i++){
+            int face = (int)(Math.random()*6);
+            while (face == lastFace)
+                face = (int)(Math.random()*6);
+            lastFace = face;
+    
+            int type = (int)(Math.random()*3);
+            for (int j = 0;j<=type;j++)
+                rotateFace(face);
             
-            for (int i = 0; i < 4; i++) {
-                cube[faces[i]][0][c] = cube[faces[i + 1]][0][c];
-            }
-            
-            // Put the saved starting sticker into the final face of the cycle
-            cube[faces[3]][0][c] = t;
+            scrambleString += notation[face] + suffixes[type] + " ";
         }
+        
+        System.out.println(scrambleString);
+        displayCube();
     }
 }
