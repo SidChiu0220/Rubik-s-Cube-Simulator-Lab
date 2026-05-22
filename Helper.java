@@ -53,7 +53,8 @@ public class Helper {
         cube[4] = cube[3];
         cube[3] = cube[2];
         cube[2] = temp;
-        // FIX: Removed top/bottom rotations to protect row-column alignment integrity
+        rotateFaceClockwise(cube[5]);
+        rotateFaceCounterClockwise(cube[0]);
     }
 
     public static void spinCubeLeft(char[][][] cube) {
@@ -62,7 +63,8 @@ public class Helper {
         cube[2] = cube[3];
         cube[3] = cube[4];
         cube[4] = temp;
-        // FIX: Removed top/bottom rotations to protect row-column alignment integrity
+        rotateFaceClockwise(cube[0]);
+        rotateFaceCounterClockwise(cube[5]);
     }
 
     public static void rotateFaceClockwise(char[][] face) {

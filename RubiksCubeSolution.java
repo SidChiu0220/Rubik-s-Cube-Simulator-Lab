@@ -3,7 +3,7 @@ public class RubiksCubeSolution{
     static private char[] faceColors = {'Y', 'R', 'G', 'O', 'B', 'W'};
     
     public RubiksCubeSolution(){
-        //Initiate and assign right colors of all 6 faces
+    //Initiate and assign right colors of all 6 faces
         for (int i = 0; i < cube.length; i++)
         // Loop through the 3 rows of the current face
         for (int j = 0; j < cube[i].length; j++)
@@ -14,7 +14,8 @@ public class RubiksCubeSolution{
             }
     }
     
-    public void displayFace(int face, String padding) {
+    public void displayFace(int face, String padding){
+    //Display the assigned face and assinged padding
         for (char[] row : cube[face]) {
             System.out.print(padding);
             for (char col : row) {
@@ -24,8 +25,9 @@ public class RubiksCubeSolution{
         }
     }
 
-    public void displayCube() {
-        displayFace(0, "        ");
+    public void displayCube(){
+    //Display all 6 faces in the correct format using at least two calls of displayFace() method
+        displayFace(0, "       ");
         
         //Print Middle Faces (Indices 1, 2, 3, 4) side-by-side
         for (int r = 0; r < 3; r++) {
@@ -38,7 +40,7 @@ public class RubiksCubeSolution{
             System.out.println();
         }
         
-        displayFace(5, "        ");
+        displayFace(5, "       ");
     }
     
     
@@ -72,10 +74,12 @@ public class RubiksCubeSolution{
         }
     }
     
-    public void rotateFace(int face) {
-        if (face == 0) {
+    public void rotateFace(int face){
+    //Rotate the face by using the provided helper methods for setup and execute rotateTop()
+    //Remember to undo the setup
+    if (face == 0) {
             rotateTop();
-        } else if (face == 1) {
+        } else if (face == 1) { //Left (Red)
             Helper.spinCubeRight(cube);
             Helper.tiltCubeForward(cube);
             rotateTop();
@@ -109,6 +113,11 @@ public class RubiksCubeSolution{
     }
     
     public void scramble(int moves){
+    //Generate and execute a random scramble seperated by spaces on the cube and print it out using displayCube()
+    //U is upper/white(0), L is left/red(1), F is front/green(2), R is right/orange(3), B is back/blue(4), D is down/white(5)
+    //' is counterclockwise, 2 means rotate twice CW or CCW
+    //Example: scramble(3) "U2 L L'"
+    
         String[] notation = {"U", "L", "F", "R", "B", "D"};
         String[] suffixes = {"", "2", "'"};
         String scrambleString = "";
@@ -129,5 +138,9 @@ public class RubiksCubeSolution{
         
         System.out.println(scrambleString);
         displayCube();
+    }
+    
+    public void execute(String input){
+        
     }
 }
