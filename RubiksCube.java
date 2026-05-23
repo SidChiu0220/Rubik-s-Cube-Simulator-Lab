@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class RubiksCube{
     private char [][][] cube = new char[6][3][3];
     static private char[] faceColors = {'Y', 'R', 'G', 'O', 'B', 'W'};
@@ -22,7 +24,7 @@ public class RubiksCube{
     }
     
     public void rotateFace(int face){
-    //Rotate the face by using the provided helper methods for setup and execute rotateTop()
+    ////Rotate the face a set number of times by using the provided helper methods for setup and execute rotateTop()
     //Remember to undo the setup
     }
     

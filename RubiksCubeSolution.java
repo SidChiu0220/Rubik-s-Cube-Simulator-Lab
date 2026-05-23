@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 public class RubiksCubeSolution{
     private char [][][] cube = new char[6][3][3];
-    static private char[] faceColors = {'Y', 'R', 'G', 'O', 'B', 'W'};
+    static private char[] faceColors = {'W', 'O', 'G', 'R', 'B', 'Y'};
     
     public RubiksCubeSolution(){
     //Initiate and assign right colors of all 6 faces
@@ -28,7 +30,6 @@ public class RubiksCubeSolution{
     public void displayCube(){
     //Display all 6 faces in the correct format using at least two calls of displayFace() method
         displayFace(0, "       ");
-        
         //Print Middle Faces (Indices 1, 2, 3, 4) side-by-side
         for (int r = 0; r < 3; r++) {
             for (int f = 1; f <= 4; f++) {
@@ -39,7 +40,6 @@ public class RubiksCubeSolution{
             }
             System.out.println();
         }
-        
         displayFace(5, "       ");
     }
     
@@ -48,7 +48,6 @@ public class RubiksCubeSolution{
     //Rotate the top face:
     //The stickers the top later is shifted
     //the top rows of the 4 faces that share a side with it will shift
-    
         //Swap corners
         char temp = cube[0][0][0];
         cube[0][0][0] = cube[0][2][0]; 
@@ -63,7 +62,7 @@ public class RubiksCubeSolution{
         cube[0][2][1] = cube[0][1][2];
         cube[0][1][2] = temp;
     
-        //Blue(4) -> Red(3) -> Green(2) -> Orange(1) -> Blue(4)
+        //Blue(4) -> Orange(3) -> Green(2) -> Red(1) -> Blue(4)
         for (int piece = 0;piece < 3;piece++){
         //3 pieces per face are changed, so 4 pieces are exchanged at a time
             temp = cube[1][0][piece];
@@ -75,66 +74,61 @@ public class RubiksCubeSolution{
     }
     
     public void rotateFace(int face, int times){
-    //Rotate the face by using the provided helper methods for setup and execute rotateTop()
+    //Rotate the face a set number of times by using the provided helper methods for setup and execute rotateTop()
     //Remember to undo the setup
-    
     for (int i = 0;i < times;i++){
-        if (face == 0) {
-                rotateTop();
-            } else if (face == 1) { //Left (Red)
-                Helper.spinCubeRight(cube);
-                Helper.tiltCubeForward(cube);
-                rotateTop();
-                Helper.tiltCubeBackward(cube);
-                Helper.spinCubeLeft(cube);
-            } else if (face == 2) { // Front (Green)
-                Helper.tiltCubeForward(cube);
-                rotateTop();
-                Helper.tiltCubeBackward(cube);
-            } else if (face == 3) { // Right (Orange)
-                Helper.spinCubeLeft(cube);
-                Helper.tiltCubeForward(cube);
-                rotateTop();
-                Helper.tiltCubeBackward(cube);
-                Helper.spinCubeRight(cube);
-            } else if (face == 4) { // Back (Blue)
-                Helper.spinCubeRight(cube);
-                Helper.spinCubeRight(cube);
-                Helper.tiltCubeForward(cube);
-                rotateTop();
-                Helper.tiltCubeBackward(cube);
-                Helper.spinCubeRight(cube);
-                Helper.spinCubeRight(cube);
-            } else if (face == 5) { // Down (White)
-                Helper.tiltCubeForward(cube);
-                Helper.tiltCubeForward(cube);
-                rotateTop();
-                Helper.tiltCubeBackward(cube);
-                Helper.tiltCubeBackward(cube);
+        if (face == 0)
+            rotateTop();
+        else if (face == 1) { //Left
+            Helper.spinCubeRight(cube);
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+            Helper.spinCubeLeft(cube);
+        } else if (face == 2) { // Front
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+        } else if (face == 3) { // Right
+            Helper.spinCubeLeft(cube);
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+            Helper.spinCubeRight(cube);
+        } else if (face == 4) { // Back
+            Helper.spinCubeRight(cube);
+            Helper.spinCubeRight(cube);
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+            Helper.spinCubeRight(cube);
+            Helper.spinCubeRight(cube);
+        } else if (face == 5) { // Down
+            Helper.tiltCubeForward(cube);
+            Helper.tiltCubeForward(cube);
+            rotateTop();
+            Helper.tiltCubeBackward(cube);
+            Helper.tiltCubeBackward(cube);
             }
         }
     }
     
     public void scramble(int moves){
     //Generate and execute a random scramble seperated by spaces on the cube and print it out using displayCube()
-    //U is upper/white(0), L is left/red(1), F is front/green(2), R is right/orange(3), B is back/blue(4), D is down/white(5)
+    //U is up(0), L is left(1), F is front(2), R is right(3), B is back(4), D is down(5)
     //' is counterclockwise, 2 means rotate twice CW or CCW
     //Example: scramble(3) "U2 L L'"
-    
         String[] notation = {"U", "L", "F", "R", "B", "D"};
         String[] suffixes = {"", "2", "'"};
         String scrambleString = "";
         int lastFace = -1;
-        
         for (int i = 0;i<moves;i++){
             int face = (int)(Math.random()*6);
             while (face == lastFace)
                 face = (int)(Math.random()*6);
             lastFace = face;
-    
             int type = (int)(Math.random()*3);
-            rotateFace(face, type);
-            
+            rotateFace(face, type+1);
             scrambleString += notation[face] + suffixes[type] + " ";
         }
         
@@ -144,14 +138,12 @@ public class RubiksCubeSolution{
     
     public void execute(String input){
     //Let user input list of strings to solve cube
-        
         String[] moves = input.split(" ");
+        ArrayList<Integer> facesToRotate = new ArrayList<>();
+        ArrayList<Integer> timesToRotate = new ArrayList<>();
+        //Validation Pass
         for (String move : moves){
             int face = -1;
-            if (move.length()>2){
-                System.out.println("Invalid Input");
-                break;
-            }
             if (move.substring(0,1).equals("U"))
                 face = 0;
             else if (move.substring(0,1).equals("L"))
@@ -166,21 +158,30 @@ public class RubiksCubeSolution{
                 face = 5;
             else {
                 System.out.println("Invalid Input");
-                break;
+                return;
             }
             
             int times = 1;
-            if (move.length()==2){
-                if (move.substring(1).equals("'")){
-                    rotateFace(face,3);
-                } else if (move.substring(1).equals("2")){
-                    rotateFace(face,2);
+            if (move.length() == 2) {
+                String suffix = move.substring(1);
+                if (suffix.equals("'"))
+                    times = 3;
+                else if (suffix.equals("2"))
+                    times = 2;
+                else {
+                    System.out.println("Invalid Input");
+                    return;
                 }
-            } else if (move.length()==1){
-                rotateFace(face,1);
-            }else {
+            } else if (move.length() != 1) {
                 System.out.println("Invalid Input");
+                return;
             }
+            facesToRotate.add(face);
+            timesToRotate.add(times);
         }
+        //Execution Pass
+        for (int i = 0; i < facesToRotate.size(); i++) 
+            rotateFace(facesToRotate.get(i), timesToRotate.get(i));            
+        displayCube();
     }
 }
