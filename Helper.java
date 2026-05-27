@@ -1,6 +1,5 @@
 public class Helper {
     public static void tiltCubeForward(char[][][] cube) {
-        //Make front face up face
         char[][] orig0 = cube[0];
         char[][] orig2 = cube[2];
         char[][] orig4 = cube[4];
@@ -25,7 +24,6 @@ public class Helper {
     }
 
     public static void tiltCubeBackward(char[][][] cube) {
-        //Make front face down face
         char[][] orig0 = cube[0];
         char[][] orig2 = cube[2];
         char[][] orig4 = cube[4];
@@ -50,7 +48,6 @@ public class Helper {
     }
 
     public static void spinCubeRight(char[][][] cube) {
-        //Make front face right face
         char[][] temp = cube[1];
         cube[1] = cube[4];
         cube[4] = cube[3];
@@ -61,7 +58,6 @@ public class Helper {
     }
 
     public static void spinCubeLeft(char[][][] cube) {
-        //Make front face left face
         char[][] temp = cube[1];
         cube[1] = cube[2];
         cube[2] = cube[3];
@@ -71,15 +67,14 @@ public class Helper {
         rotateFaceCounterClockwise(cube[5]);
     }
 
-    //following methods for testing only
-    private static void rotateFaceClockwise(char[][] face) {
+    public static void rotateFaceClockwise(char[][] face) {
         char temp = face[0][0];
         face[0][0] = face[2][0]; face[2][0] = face[2][2]; face[2][2] = face[0][2]; face[0][2] = temp;
         temp = face[0][1];
         face[0][1] = face[1][0]; face[1][0] = face[2][1]; face[2][1] = face[1][2]; face[1][2] = temp;
     }
 
-    private static void rotateFaceCounterClockwise(char[][] face) {
+    public static void rotateFaceCounterClockwise(char[][] face) {
         char temp = face[0][0];
         face[0][0] = face[0][2]; face[0][2] = face[2][2]; face[2][2] = face[2][0]; face[2][0] = temp;
         temp = face[0][1];
