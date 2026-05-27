@@ -1,15 +1,15 @@
 #BlueJ class context
 comment0.target=Helper
 comment1.params=cube
-comment1.target=void\ tiltCubeForward(char[][][])
+comment1.target=void\ tiltCubeForward(java.lang.String[][][])
 comment2.params=cube
-comment2.target=void\ tiltCubeBackward(char[][][])
+comment2.target=void\ tiltCubeBackward(java.lang.String[][][])
 comment3.params=cube
-comment3.target=void\ spinCubeRight(char[][][])
+comment3.target=void\ spinCubeRight(java.lang.String[][][])
 comment4.params=cube
-comment4.target=void\ spinCubeLeft(char[][][])
+comment4.target=void\ spinCubeLeft(java.lang.String[][][])
 comment5.params=face
-comment5.target=void\ rotateFaceClockwise(char[][])
+comment5.target=void\ rotateFaceClockwise(java.lang.String[][])
 comment6.params=face
-comment6.target=void\ rotateFaceCounterClockwise(char[][])
+comment6.target=void\ rotateFaceCounterClockwise(java.lang.String[][])
 numComments=7

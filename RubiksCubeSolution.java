@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class RubiksCubeSolution{
-    private char [][][] cube = new char[6][3][3];
-    static private char[] faceColors = {'W', 'O', 'G', 'R', 'B', 'Y'};
+    private String [][][] cube = new String[6][3][3];
+    static private String[] faceColors = {"🔲", "🟧", "🟩", "🟥", "🟦", "🟨"};
     
     public RubiksCubeSolution(){
     //Initiate and assign right colors of all 6 faces
@@ -18,9 +18,9 @@ public class RubiksCubeSolution{
     
     public void displayFace(int face, String padding){
     //Display the assigned face and assinged padding
-        for (char[] row : cube[face]) {
+        for (String[] row : cube[face]) {
             System.out.print(padding);
-            for (char col : row) {
+            for (String col : row) {
                 System.out.print(col + " ");
             }
             System.out.println();
@@ -29,7 +29,9 @@ public class RubiksCubeSolution{
 
     public void displayCube(){
     //Display all 6 faces in the correct format using at least two calls of displayFace() method
-        displayFace(0, "       ");
+        displayFace(0, "          ");
+        System.out.println();
+        
         //Print Middle Faces (Indices 1, 2, 3, 4) side-by-side
         for (int r = 0; r < 3; r++) {
             for (int f = 1; f <= 4; f++) {
@@ -40,7 +42,9 @@ public class RubiksCubeSolution{
             }
             System.out.println();
         }
-        displayFace(5, "       ");
+        
+        System.out.println();
+        displayFace(5, "          ");
     }
     
     
@@ -49,7 +53,7 @@ public class RubiksCubeSolution{
     //The stickers the top later is shifted
     //the top rows of the 4 faces that share a side with it will shift
         //Swap corners
-        char temp = cube[0][0][0];
+        String temp = cube[0][0][0];
         cube[0][0][0] = cube[0][2][0]; 
         cube[0][2][0] = cube[0][2][2];
         cube[0][2][2] = cube[0][0][2];

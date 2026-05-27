@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class RubiksCube{
-    private char [][][] cube = new char[6][3][3];
-    static private char[] faceColors = {'Y', 'R', 'G', 'O', 'B', 'W'};
+    private String [][][] cube = new String[6][3][3];
+    static private String[] faceColors = {"🔲", "🟧", "🟩", "🟥", "🟦", "🟨"};
     
     public RubiksCube(){
     //Initiate and assign right colors of all 6 faces
