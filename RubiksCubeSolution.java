@@ -16,83 +16,31 @@ public class RubiksCubeSolution{
             }
     }
     
-    public void displayCube() {
-        // Emoji representations for each color
-        String[] emojis = {"⬜", "🟨", "🟩", "🟦", "🟧", "🟥"};
-    
-        // Display top face
-        displayFaceEmoji(0, "       ", emojis);
-    
-        // Display middle 4 faces side-by-side
+    public void displayFace(int face, String padding){
+    //Display the assigned face and assinged padding
+        for (char[] row : cube[face]) {
+            System.out.print(padding);
+            for (char col : row) {
+                System.out.print(col + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void displayCube(){
+    //Display all 6 faces in the correct format using at least two calls of displayFace() method
+        displayFace(0, "       ");
+        //Print Middle Faces (Indices 1, 2, 3, 4) side-by-side
         for (int r = 0; r < 3; r++) {
             for (int f = 1; f <= 4; f++) {
                 for (int c = 0; c < 3; c++) {
-    
-                    char color = cube[f][r][c];
-    
-                    // Convert character color to emoji
-                    switch (color) {
-                        case 'W':
-                            System.out.print("⬜️ ");
-                            break;
-                        case 'Y':
-                            System.out.print("🟨 ");
-                            break;
-                        case 'G':
-                            System.out.print("🟩 ");
-                            break;
-                        case 'B':
-                            System.out.print("🟦 ");
-                            break;
-                        case 'O':
-                            System.out.print("🟧 ");
-                            break;
-                        case 'R':
-                            System.out.print("🟥 ");
-                            break;
-                    }
+                    System.out.print(cube[f][r][c] + " ");
                 }
-                System.out.print("  ");
+                System.out.print(" ");
             }
             System.out.println();
         }
-    
-        // Display bottom face
-        displayFaceEmoji(5, "       ", emojis);
-    }
-    
-    // Helper method for displaying a single face with emojis
-    public void displayFaceEmoji(int face, String indent, String[] emojis) {
-        for (int r = 0; r < 3; r++) {
-            System.out.print(indent);
-    
-            for (int c = 0; c < 3; c++) {
-                char color = cube[face][r][c];
-    
-                switch (color) {
-                    case 'W':
-                        System.out.print("⬜ ");
-                        break;
-                    case 'Y':
-                        System.out.print("🟨 ");
-                        break;
-                    case 'G':
-                        System.out.print("🟩 ");
-                        break;
-                    case 'B':
-                        System.out.print("🟦 ");
-                        break;
-                    case 'O':
-                        System.out.print("🟧 ");
-                        break;
-                    case 'R':
-                        System.out.print("🟥 ");
-                        break;
-                }
-            }
-    
-            System.out.println();
-        }
+        displayFace(5, "       ");
     }
     
     

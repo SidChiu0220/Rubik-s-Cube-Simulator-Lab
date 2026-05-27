@@ -2,10 +2,10 @@
 comment0.target=RubiksCubeSolution
 comment1.params=
 comment1.target=RubiksCubeSolution()
-comment2.params=
-comment2.target=void\ displayCube()
-comment3.params=face\ indent\ emojis
-comment3.target=void\ displayFaceEmoji(int,\ java.lang.String,\ java.lang.String[])
+comment2.params=face\ padding
+comment2.target=void\ displayFace(int,\ java.lang.String)
+comment3.params=
+comment3.target=void\ displayCube()
 comment4.params=
 comment4.target=void\ rotateTop()
 comment5.params=face\ times
