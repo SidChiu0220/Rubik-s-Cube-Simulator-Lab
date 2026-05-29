@@ -118,7 +118,7 @@ public class RubiksCubeSolution{
     }
     
     public void scramble(int moves){
-    //Generate and execute a random scramble seperated by spaces on the cube and print it out using displayCube()
+    //Generate and execute a random scramble separated by spaces on the cube and print it out using displayCube()
     //U is up(0), L is left(1), F is front(2), R is right(3), B is back(4), D is down(5)
     //' is counterclockwise, 2 means rotate twice CW or CCW
     //Example: scramble(3) "U2 L L'"

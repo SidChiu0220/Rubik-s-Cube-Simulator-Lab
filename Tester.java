@@ -10,7 +10,7 @@ public class Tester {
         Scanner console = new Scanner(System.in);
         
         while (true) {
-            System.out.print("\nEnter 'display', 'reset', 'scramble(number)', moves seperated by spaces, or 'exit': ");
+            System.out.print("\nEnter 'display', 'reset', 'scramble(number)', moves separated by spaces, or 'exit': ");
             String input = console.nextLine().trim();
             
             if (input.equals("exit")) {
